@@ -21,16 +21,19 @@ var y = d3.scaleLinear()
     .range([ heightBar, 0]);
 svgBar.append("g")
     .call(d3.axisLeft(y).tickSize(-width*1.3).ticks(7))
-    .select(".domain").remove()
+    .selectAll("text")
+        .style("font-size", "1.6em")
 
   var x = d3.scaleBand()
     .range([ 0, widthBar ])
     .domain(data.map(function(d, i) { return d.Country; }))
-    .padding(0.2);
+    .padding(0.3);
   svgBar.append("g")
     .attr("transform", "translate(0," + heightBar + ")")
     .call(d3.axisBottom(x))
-    .selectAll("text").remove()
+    .selectAll(".tick").remove()
+
+svgBar.select(".domain").remove()
 
 var colorBar = d3.scaleOrdinal()
     .range(['#FF5967','#24CCB8','#FFD322','#FF8B8B','#70CCFF','#AE7EFC','#8EE765','#89A8F4','#FE9A6F']);
@@ -45,8 +48,6 @@ svgBar.selectAll(".tick line").attr("stroke", "#DCDFE3")
         .attr("width", x.bandwidth())
         .attr("height", function(d) { return heightBar - y(d.Value); })
         .attr("fill", function(d, i){;  return(colorBar(i % 3)); })
-        .attr("rx", "6")
-        .attr("ry", "5")
         .on('mouseover', function (d, i) {
             d3.select(this).transition()
               .duration('50')
@@ -62,7 +63,7 @@ svgBar.selectAll(".tick line").attr("stroke", "#DCDFE3")
             })
           .on('mousemove', function(d, i) {
             let country = d.Country
-            div.html(country)
+            div.html(country + "<br />" + d.Value + "$")
               .style("left", (d3.event.pageX + 10) + "px")
               .style("top", (d3.event.pageY - 15) + "px");
           })
