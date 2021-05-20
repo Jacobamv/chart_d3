@@ -1,3 +1,8 @@
+main {
+    display: flex;
+    justify-content: space-around;
+}
+
 div.tooltip-donut {
     position: absolute;
     text-align: center;

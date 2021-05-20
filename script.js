@@ -4,7 +4,7 @@ var width = 450
 
 var radius = Math.min(width, height) / 2 - margin
 
-var svg = d3.select("#my_dataviz")
+var svgLine = d3.select("#my_dataviz")
   .append("svg")
     .attr("width", width)
     .attr("height", height * 2)
@@ -31,7 +31,7 @@ var pie = d3.pie()
   .value(function(d) {return d.value; })
 var data_ready = pie(d3.entries(data))
 
-svg
+svgLine
   .selectAll('whatever')
   .data(data_ready)
   .enter()
@@ -81,7 +81,7 @@ var color = d3.scaleOrdinal()
   .domain(keys)
   .range(['#FF5967','#24CCB8','#FFD322','#FF8B8B','#70CCFF','#AE7EFC','#8EE765','#89A8F4','#FE9A6F']);
 
-svg.selectAll("mydots")
+svgLine.selectAll("mydots")
   .data(keys)
   .enter()
   .append("circle")
@@ -90,7 +90,7 @@ svg.selectAll("mydots")
     .attr("r", 7)
     .style("fill", function(d){ return color(d)})
 
-svg.selectAll("mylabels")
+svgLine.selectAll("mylabels")
   .data(keys)
   .enter()
   .append("text")
