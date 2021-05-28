@@ -45,7 +45,7 @@ svgLine
   .style("stroke-width", "0px")
   .on('mouseover', function (d, i) {
     d3.select(this).transition()
-      .duration('50')
+      .duration('300')
       .attr('opacity', '.85')
       .attr('d', d3.arc()
         .innerRadius(90)
@@ -64,7 +64,7 @@ svgLine
   })
   .on('mouseout', function (d, i) {
     d3.select(this).transition()
-      .duration('50')
+      .duration('300')
       .attr('opacity', '1')
       .attr('d', d3.arc()
         .innerRadius(90)
